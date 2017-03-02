@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Travel Schedules and Plans</title>
+	</head>
+	<body>
+		<p><a href="/logout">Logout</a></p>
+		<h2>Hello {{request.session.theuser}} !</h2>
+
+		</div>
+			<h2>Your Trip Schedules</h2>
+			<table>
+			  <tr>
+			    <th>Destination</th>
+			    <th>Travel Start Date</th> 
+			    <th>Travel End Date</th>
+			    <th>Plan</th>
+			  </tr>
+			  {% if travels %}
+			  	{% for travel in travels %}
+			  <tr>
+			    <td><a href="/travels/destination/{{travel.id}}">{{travel.destination}}</a></td>
+			    <td>{{travel.travelstart}}</td> 
+			    <td>{{travel.travelend}}</td>
+			    <td>{{travel.description}}</td>
+			  </tr>
+			  	{% endfor %}
+			  {% endif %}
+			</table>
+		</div>
+		</div>
+			<h2>Other User's Travel Plans</h2>
+			<table>
+			  <tr>
+			  	<th>Name</th>
+			    <th>Destination</th>
+			    <th>Travel Start Date</th> 
+			    <th>Travel End Date</th>
+			    <th>Do You Want to Join?</th>
+			  </tr>
+			  {%if other_travels %}
+
+			  	{%for other_travel in other_travels %}
+				  <tr>
+				    <td>{{other_travel.user.name}}</td>
+				    <td><a href="/travels/destination/{{other_travel.id}}">{{other_travel.destination}}</a></td> 
+				    <td>{{other_travel.travelstart}}</td>
+				    <td>{{other_travel.travelend}}</td>
+				    <td><a href="/joins/{{other_travel.id}}" method = 'get'>Joins</a></td>
+				  </tr>
+				  {% endfor %}
+				 {% endif %}
+
+			</table>
+		</div>
+		<p><a href="/travels/add">Add Travel Plan</a></p>
+	</body>
+</html>
